@@ -10,6 +10,10 @@ namespace twozerofoureight
     public class Model
     {
         protected ArrayList oList;
+        protected int Score;
+        protected bool Gameover = false;
+        protected bool toviweGameover = false;
+        public bool is_full = false;
 
         public Model()
         {
@@ -26,6 +30,24 @@ namespace twozerofoureight
         public void AttachObserver(View m)
         {
             oList.Add(m);
+        }
+
+        public int ScoreTotal()
+        {
+            return Score;
+        }
+
+        public Boolean Game_over()
+        {
+            if (Gameover == true && is_full == true)
+            {
+                toviweGameover = true;
+            }
+            else
+            {
+                toviweGameover = false;
+            }
+            return toviweGameover;
         }
 
     }

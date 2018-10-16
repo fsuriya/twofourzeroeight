@@ -77,24 +77,35 @@ namespace twozerofoureight
             UpdateTile(lbl33,board[3, 3]);
         }
 
-        private void btnLeft_Click(object sender, EventArgs e)
+        private void TwoZeroFourEightView_KeyDown(object sender, KeyEventArgs e)
         {
-            controller.ActionPerformed(TwoZeroFourEightController.LEFT);
-        }
+            switch (e.KeyValue)
+            {
+                case 37:
+                    controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+                    break;
+                case 38:
+                    controller.ActionPerformed(TwoZeroFourEightController.UP);
+                    break;
+                case 39:
+                    controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
+                    break;
+                case 40:
+                    controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+                    break;
+            }
+            
+            lblScore.Text = model.ScoreTotal().ToString();
 
-        private void btnRight_Click(object sender, EventArgs e)
-        {
-            controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
-        }
+            if (model.Game_over())
+            {
+                lblShow.Text = "GameOver";
+            }
+            else
+            {
+                lblShow.Text = "";
+            }
 
-        private void btnUp_Click(object sender, EventArgs e)
-        {
-            controller.ActionPerformed(TwoZeroFourEightController.UP);
-        }
-
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-            controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
 
     }

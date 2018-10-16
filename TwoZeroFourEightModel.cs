@@ -11,7 +11,7 @@ namespace twozerofoureight
         protected int boardSize; // default is 4
         protected int[,] board;
         protected Random rand;
-
+        
         public TwoZeroFourEightModel() : this(4)
         {
             // default board size is 4 
@@ -37,9 +37,45 @@ namespace twozerofoureight
             NotifyAll();
         }
 
+        private Boolean isGameOver()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if( ((i < 3) && board[i,j] == board[i + 1,j]) || ((i > 0) && board[i, j] == board[i - 1, j]) || ((j < 3) && board[i, j] == board[i, j + 1]) || ((j > 0) && board[i, j] == board[i, j - 1]))
+                    {
+                        Gameover = false;
+                        return false;
+                    }
+                    
+                }
+            }
+            Gameover = true;
+            return Gameover;
+        }
+
+        private Boolean isfull()
+        {
+            isGameOver();
+            for(int i = 0; i < 4; i++)
+            {
+                for(int j = 0; j < 4; j++)
+                {
+                    if(board[i, j] == 0)
+                    {
+                        is_full = false;
+                        return false;
+                    }
+                }
+            }
+            is_full = true;
+            return true;
+        }   
+
         private int[,] Random(int[,] input)
         {
-            while (true)
+            while (!isfull())
             {
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
@@ -82,6 +118,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        Score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }
@@ -134,6 +171,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        Score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }
@@ -188,6 +226,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        Score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }
@@ -239,6 +278,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        Score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }
